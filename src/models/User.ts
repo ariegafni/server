@@ -1,17 +1,25 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Document } from "mongoose";
+import bcrypt from "bcryptjs";
 
-export interface IUser extends Document {
-    username: string;
-    password: string;
-    hasVoted: boolean;
-    votedFor: mongoose.Types.ObjectId | null;
+interface IUser extends Document {
+  name: string;
+  password: string;
+  organization: string;
+  area?: string;
+  comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
-const UserSchema: Schema = new Schema({
-    username: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    hasVoted: { type: Boolean, default: false },
-    votedFor: { type: Schema.Types.ObjectId, ref: 'Candidate', default: null }
+const userSchema = new mongoose.Schema<IUser>({
+  name: { type: String, required: true },
+  password: { type: String, required: true },
+  organization: { type: String, required: true },
+  area: { type: String }
 });
 
-export default mongoose.model<IUser>('User', UserSchema);
+userSchema.methods.comparePassword = function (candidatePassword: string): Promise<boolean> {
+  return bcrypt.compare(candidatePassword, this.password);  
+};
+
+const User = mongoose.model<IUser>('User', userSchema);
+
+export default User;
