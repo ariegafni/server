@@ -21,7 +21,8 @@ app.use(cors({
 app.use(express.json());
 
 // חיבור למסד הנתונים
-mongoose.connect('mongodb+srv://ariegafni18:2duueuTxbK8Re2mB@arie.xkhfs.mongodb.net/WarSimulator?retryWrites=true&w=majority&appName=Claster0')
+// חיבור למסד הנתונים
+mongoose.connect(process.env.MONGODB_URI!)
   .then(() => console.log('Connected to MongoDB Atlas!'))
   .catch((err) => console.error('Error connecting to MongoDB Atlas:', err));
 
