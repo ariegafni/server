@@ -1,6 +1,6 @@
 // gameRoutes.ts:
 import express from 'express';
-import GameService from '../Services/GameService';
+import GameService from '../Services/attackService';
 import Organization from '../models/organization';
 import Missile from '../models/missile';
 
@@ -48,6 +48,7 @@ router.get('/missiles/:orgName', async (req : any, res: any) => {
 router.post('/launch', async (req : any, res: any)=> {
   try {
     const { missileType, sourceOrg, targetArea } = req.body;
+    console.log('Launch request body:', req.body);
     
     if (!missileType || !sourceOrg || !targetArea) {
       return res.status(400).json({ message: 'Missing required fields' });
@@ -87,5 +88,23 @@ router.post('/intercept', async (req : any, res: any) => {
     res.status(400).json({ message: error.message });
   }
 });
+
+// router.get('/getallmissiles', async (req : any, res: any) => {
+//   try {
+//     const missiles = await Missile.find();
+//     res.json(missiles);
+//   } catch (error) {
+//     res.status(500).json({ message: 'Server error', error });
+//   }
+// });
+
+// router.get('/getallorganizations', async (req : any, res: any) => {
+//   try {
+//     const organizations = await Organization.find();
+//     res.json(organizations);
+//   } catch (error) {
+//     res.status(500).json({ message: 'Server error', error });
+//   }
+// });
 
 export default router;

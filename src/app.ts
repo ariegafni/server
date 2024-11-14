@@ -7,7 +7,9 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 
 import userRoutes from './routes/userRoutes';
-import gameRoutes from './routes/gameRoutes';
+import gameRoutes from './routes/attackRoutes';
+import storeRoutes from './routes/storeRoutes';
+import defenseRoutes from './routes/defenseRoutes';
  
 dotenv.config();
 const app = express();
@@ -27,6 +29,8 @@ app.use(cors({
 app.use(express.json());
 app.use("/api/users", userRoutes);
 app.use("/api/game", gameRoutes);
+app.use("/api/store", storeRoutes);
+app.use("/api/defense", defenseRoutes);
 
 
 io.on('connection', (socket) => {
@@ -73,7 +77,5 @@ mongoose.connect(process.env.MONGODB_URI!)
   });
 
 export { io }; 
-
-
-
-
+//רשימת טילים של אירגון
+// http://localhost:3000/api/store/missiles/:organizationName

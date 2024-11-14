@@ -1,4 +1,4 @@
-// GameService.ts:
+// attackService.ts:
 import { io } from '../app';
 import Missile from '../models/missile';
 import Organization from '../models/organization';
