@@ -1,3 +1,4 @@
+// organization.ts:
 import mongoose, { Schema, Document } from 'mongoose';
 
 const organizationSchema = new Schema({
@@ -10,6 +11,8 @@ const organizationSchema = new Schema({
 
 });
 const Organization = mongoose.model('Organization', organizationSchema);
+
+export default Organization;
 
 // const organizations = require('../json/organizations.json'); 
 

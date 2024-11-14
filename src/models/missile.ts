@@ -1,3 +1,5 @@
+
+// missil.ts:
 import mongoose from "mongoose";
 const missileSchema = new mongoose.Schema({
     name: String,
@@ -7,6 +9,7 @@ const missileSchema = new mongoose.Schema({
     price : Number
 });
 const Missile = mongoose.model('Missile', missileSchema);
+export default Missile;
 // const missiles = require('../json/missiles.json'); 
 
 // Missile.insertMany(missiles)
